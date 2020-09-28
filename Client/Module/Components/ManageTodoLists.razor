@@ -1,0 +1,32 @@
+﻿@namespace PoisnFang.Todo.Components
+@inherits TodoBaseIgnore
+
+@if (ModuleData.TodoLists == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ActionLink Action="Add" Security="SecurityAccessLevel.Edit" Text="Add Todo" />
+    <br />
+    <br />
+    @if (ModuleData.TodoLists.Count != 0)
+    {
+        <Pager Items="@ModuleData.TodoLists" Format="Grid">
+            <Header>
+                <div class="col"><strong>Todos</strong></div>
+            </Header>
+            <Row>
+                <div class="col">
+                    <ActionLink Action="Edit" Parameters="@($"id=" + context.Id.ToString())" />
+                    <ActionDialog Header="Delete Todo" Message="@("Are You Sure You Wish To Delete The " + context.Name + " Todo?")" Action="Delete" Security="SecurityAccessLevel.Edit" Class="btn btn-danger" OnClick="@(async () => await Delete(context.Id))" />
+                    @context.Name
+                </div>
+            </Row>
+        </Pager>
+    }
+    else
+    {
+        <p>No Todos To Display</p>
+    }
+}

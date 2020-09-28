@@ -1,0 +1,25 @@
+﻿@namespace PoisnFang.Todo
+@inherits TodoBase
+
+<CascadingValue Value="@_moduleData">
+
+    @switch (_moduleData?.ModuleAction)
+    {
+        case ManageTodoLists:
+            <ManageTodoLists />
+            break;
+
+        case AddTodoList:
+        case EditTodoList:
+            <EditTodoList />
+            break;
+
+        case AddTodoTask:
+        case EditTodoTask:
+            <EditTodoTask />
+            break;
+
+        default:
+            break;
+    }
+</CascadingValue>
